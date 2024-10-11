@@ -1,0 +1,49 @@
+name: Build Macos App
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to run the workflow on"
+        required: true
+        default: "main"
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli
+
+      - name: Install Tauri dependencies
+        run: bun install
+
+      - name: Build application
+        run: cargo tauri build
+
+      - name: Upload .app artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PTracker-macos-app
+          path: src-tauri/target/release/bundle/macos/PTracker.app
+
+      - name: Upload .dmg artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PTracker-macos-dmg
+          path: src-tauri/target/release/bundle/dmg/PTracker_0.1.0_aarch64.dmg
