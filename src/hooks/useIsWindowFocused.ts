@@ -12,7 +12,7 @@ export const useIsWindowFocused = () => {
 
     window.listen("tauri://focus", handleFocus);
     window.listen("tauri://blur", handleBlur);
-  }, []);
+  }, [setIsFocused]);
 
   return isFocused;
 };

@@ -1,3 +1,4 @@
+import React from "react";
 import { useSetup } from "./hooks/useSetup";
 import TopBar from "./components/customTopBar";
 import "./App.css";
