@@ -25,4 +25,5 @@ serde_json = "1"
 tauri-plugin-devtools = "2.0.0"
 tokio = "1.40.0"
 fix-path-env = { git = "https://github.com/tauri-apps/fix-path-env-rs" }
+tauri-plugin-clipboard-manager = "2.0.1"
 

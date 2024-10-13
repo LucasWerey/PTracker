@@ -1,0 +1,53 @@
+.top-bar {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1rem;
+}
+
+.window-controls {
+  display: flex;
+  gap: 0.5rem;
+  -webkit-app-region: no-drag;
+}
+
+.window-controls button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.window-controls .close {
+  background-color: #ff5f56;
+}
+
+.window-controls .minimize {
+  background-color: #ffbd2e;
+}
+
+.window-controls .maximize {
+  background-color: #27c93f;
+}
+
+.window-controls button .icon {
+  display: none;
+  font-size: 10px;
+  color: white;
+}
+
+.window-controls button:hover .icon {
+  display: block;
+}
+
+.window-controls button.inactive {
+  background-color: #747474;
+}
+
+.window-controls button.inactive .icon {
+  display: none;
+}
