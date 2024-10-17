@@ -1,10 +1,18 @@
 .top-bar {
   display: flex;
   align-items: center;
-  padding: 1rem 1rem;
+  padding: 0;
+  background-color: #444;
+  width: 100vw;
+  height: 2.5rem;
+  top: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .window-controls {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   display: flex;
   gap: 0.5rem;
   -webkit-app-region: no-drag;

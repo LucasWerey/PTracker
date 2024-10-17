@@ -4,7 +4,7 @@ import { useSleep } from "./useSleep";
 
 async function setup(sleep: (seconds: number) => Promise<void>) {
   console.log("Performing really heavy frontend setup task...");
-  await sleep(3);
+  await sleep(6.5);
   console.log("Frontend setup task complete!");
   invoke("set_complete", { task: "frontend" });
 }

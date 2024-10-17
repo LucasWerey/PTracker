@@ -20,42 +20,12 @@
         cursor: default;
       }
 
-      .container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        animation: fadeIn 2s ease-in-out;
-        position: relative;
-        z-index: 10;
-      }
-
-      .web3-logo {
-        width: 300px;
-        height: 200px;
-        margin-bottom: 20px;
-      }
-
-      h1 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        display: inline-block;
-      }
-
-      .wave-animation {
-        display: inline-block;
-        animation: wave 6s infinite;
-      }
-
-      @keyframes wave {
-        0%,
-        100% {
-          transform: translateY(0);
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
         }
-        50% {
-          transform: translateY(-5px);
+        100% {
+          transform: rotate(360deg);
         }
       }
 
@@ -68,6 +38,7 @@
         pointer-events: none;
         overflow: hidden;
         filter: blur(5px);
+        transition: opacity 1.5s ease-in-out;
       }
 
       .falling-logos img {
@@ -96,6 +67,33 @@
           opacity: 1;
         }
       }
+
+      .preloader-progress {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out, opacity 1.5s ease-in-out;
+      }
+
+      .preloader-progress.active {
+        opacity: 1;
+      }
+
+      .preloader-progress-circles {
+        position: relative;
+        margin-bottom: 1rem;
+        will-change: opacity, transform;
+        animation: spin 4s linear infinite;
+      }
+
+      .preloader-progress-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2rem;
+        font-weight: bold;
+        transition: opacity 1.5s ease-in-out;
+      }
+
       img {
         width: 200px;
         height: 200px;
@@ -103,25 +101,52 @@
     </style>
   </head>
   <body>
-    <div class="container">
-      <img src="./Logo.png" alt="logo" />
-      <h1 id="wave-text"></h1>
-    </div>
     <div class="falling-logos" id="falling-logos"></div>
+    <div class="preloader-progress" id="preloader-progress">
+      <svg
+        class="preloader-progress-circles"
+        width="462"
+        height="462"
+        viewBox="0 0 462 462"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          class="preloader-progress-outline"
+          opacity="0.4"
+          cx="231"
+          cy="231"
+          r="115"
+          stroke="currentColor"
+          stroke-dasharray="2 2"
+          style="--circle-r2-hover: 122.55px"
+        ></circle>
+        <circle
+          class="preloader-progress-circle"
+          opacity="0.5"
+          cx="231"
+          cy="231"
+          r="120"
+          stroke="currentColor"
+          style="
+            --circle-dash-array-static: 339.29200658769764 37.69911184307752;
+            --circle-dash-offset-static: 339.29200658769764;
+            --circle-dash-array-hover: 358.06993419673455 0.07162831250184729;
+            --circle-dash-offset-hover: 358.06993419673455;
+            --circle-r1-hover: 114px;
+          "
+        ></circle>
+      </svg>
+      <div class="preloader-progress-text" id="progress-text">
+        <div class="preloader-progress-text-inner">
+          <div class="preloader-progress-text-percent" id="progress-percent">
+            0
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
-      const text = "Loading Your Portfolio Tracker...";
-      const waveText = document.getElementById("wave-text");
-
-      if (waveText) {
-        text.split("").forEach((char, index) => {
-          const span = document.createElement("span");
-          span.innerHTML = char === " " ? "&nbsp;" : char;
-          span.style.animationDelay = `${index * 0.1}s`;
-          span.classList.add("wave-animation");
-          waveText.appendChild(span);
-        });
-      }
-
       const logos = [
         "https://cryptologos.cc/logos/injective-protocol-inj-logo.png",
         "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
@@ -151,6 +176,28 @@
       for (let i = 0; i < 40; i++) {
         setTimeout(createFallingLogo, i * 300);
       }
+
+      window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader-progress");
+        const progressPercent = document.getElementById("progress-percent");
+        const progressText = document.getElementById("progress-text");
+        const fallingLogos = document.getElementById("falling-logos");
+        preloader.classList.add("active");
+
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += 1;
+          progressPercent.textContent = progress.toString();
+          if (progress >= 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+              preloader.style.opacity = "0";
+              progressText.style.opacity = "0";
+              fallingLogos.style.opacity = "0";
+            }, 1000);
+          }
+        }, 40);
+      });
     </script>
   </body>
 </html>

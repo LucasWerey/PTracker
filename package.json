@@ -11,7 +11,10 @@
     "prepare": "husky install",
     "cm": "cz",
     "test": "lint",
-    "lint": "eslint src/**/*.ts src/**/*.tsx "
+    "lint": "eslint src/**/*.ts src/**/*.tsx",
+    "generate-ui-exports": "bun run tsx ./src/scripts/generate-ui-exports.ts",
+    "generate-components-exports": "bun run tsx ./src/scripts/generate-components-exports.ts",
+    "generate-exports": "bun run generate-components-exports && bun run generate-ui-exports"
   },
   "config": {
     "commitizen": {
@@ -33,6 +36,7 @@
     "eslint": "^9.12.0",
     "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "^5.0.0",
+    "gsap": "^3.12.5",
     "jotai": "^2.10.0",
     "jotai-devtools": "^0.10.1",
     "react": "^18.2.0",
@@ -48,7 +52,8 @@
     "commitlint-config-gitmoji": "^2.3.1",
     "cz-customizable": "^7.2.1",
     "husky": "^8.0.0",
-    "typescript": "^5.2.2",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3",
     "vite": "^5.3.1"
   }
 }

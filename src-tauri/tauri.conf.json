@@ -29,6 +29,8 @@
       {
         "width": 1200,
         "height": 800,
+        "minWidth": 400,
+        "minHeight": 200,
         "decorations": false,
         "url": "splashscreen.html",
         "label": "splashscreen"

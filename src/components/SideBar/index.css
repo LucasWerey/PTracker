@@ -1,0 +1,49 @@
+.sidebar-container {
+  width: 50px;
+  background-color: #444;
+  display: block;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.toggle-button {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background-color: #555;
+  position: absolute;
+  right: -15px;
+  top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.toggle-button:hover {
+  transform: scale(1.1);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-item:hover {
+  background-color: #555;
+}
+
+.menu-item span {
+  margin-left: 10px;
+  transition: opacity 0.3s ease;
+}

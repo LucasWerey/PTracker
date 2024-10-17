@@ -6,7 +6,7 @@ use crate::{commands::set_complete, state::SetupState};
 
 pub(crate) async fn setup(app: AppHandle) -> Result<(), ()> {
     println!("Performing really heavy backend setup task...");
-    sleep(Duration::from_secs(6)).await;
+    sleep(Duration::from_secs(3)).await;
     println!("Backend setup task completed!");
     set_complete(
         app.clone(),
